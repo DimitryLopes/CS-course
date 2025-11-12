@@ -1,22 +1,32 @@
 #include <stdio.h>
 
-float CalculatePIBPerCapta(float pib, int population)
-{
-   return pib / (float)population;
+float CalculatePIBPerCapta(float pib, int population) {
+    return pib / (float)population;
 }
 
-float CalculatePopulationalDensity(int population, float area)
-{
+float CalculatePopulationalDensity(int population, float area) {
     return (float)population / area;
 }
 
-float CalculatePower(float population, float area, float pib, int touristicSpots, float density, float pibPerCapta)
-{
-    float inverseDensity = 1/density;
-    return  population + area + pib + (float)touristicSpots + pibPerCapta + inverseDensity;
+void CompareValue(float value1, float value2, char message[], int menorVence) {
+    if (!menorVence) {
+        if (value1 > value2)
+            printf("%s: Carta 1 venceu!\n", message);
+        else if (value1 < value2)
+            printf("%s: Carta 2 venceu!\n", message);
+        else
+            printf("%s: Empate!\n", message);
+    } else {
+        if (value1 < value2)
+            printf("%s: Carta 1 venceu!\n", message);
+        else if (value1 > value2)
+            printf("%s: Carta 2 venceu!\n", message);
+        else
+            printf("%s: Empate!\n", message);
+    }
 }
 
-void CompareValue(float value1, float value2, char message[])
+void CompareFloatValue(float value1, float value2, char message[])
 {
     if (value1 > value2)
     {
@@ -32,101 +42,98 @@ void CompareValue(float value1, float value2, char message[])
     }
 }
 
-int main() 
+
+int main()
 {
-    //Carta 1
-    char estadoCarta1;
-    printf("Digite o estado da carta 1: ");
-    scanf(" %c", &estadoCarta1);
-
-    int codigoCarta1;
-    printf("Digite o codigo da carta 1: ");
-    scanf("%d", &codigoCarta1);
-
+    // Carta 1
+    char estado1[3];
+    char codigo1[10];
     char nome1[50];
-    printf("Digite o nome da carta 1: ");
-    scanf("%S", nome1);
+    int populacao1, pontosTuristicos1;
+    float area1, pib1;
 
-    int populacaoCarta1;
-    printf("Digite a populacao da carta 1: ");
-    scanf("%d", &populacaoCarta1);
+    printf("Digite o estado da carta 1: ");
+    scanf("%s", estado1);
 
-    float tamanhoCarta1;
-    printf("Digite o tamanho da cidade 1: ");
-    scanf("%f", &tamanhoCarta1);
+    printf("Digite o codigo da carta 1: ");
+    scanf("%s", codigo1);
 
-    float pibCarta1;
-    printf("Digite o PIB da cidade 1: ");
-    scanf("%f", &pibCarta1);
+    printf("Digite o nome da cidade da carta 1: ");
+    scanf("%50s", nome1);
 
-    int pontosTuristicosCarta1;
-    printf("Digite a quantidade de pontos turisticos da carta 1: ");
-    scanf("%d", &pontosTuristicosCarta1);
+    printf("Digite a populacao: ");
+    scanf("%i", &populacao1);
 
-    //Carta 2
-    char estadoCarta2;
-    printf("Digite o estado da carta 2: ");
-    scanf(" %c", &estadoCarta2);
+    printf("Digite a area: ");
+    scanf("%f", &area1);
 
-    int codigoCarta2;
-    printf("Digite o codigo da carta 2: ");
-    scanf("%d", &codigoCarta2);
+    printf("Digite o PIB: ");
+    scanf("%f", &pib1);
 
+    printf("Digite o numero de pontos turisticos: ");
+    scanf("%d", &pontosTuristicos1);
+
+    // Carta 2
+    char estado2[3];
+    char codigo2[10];
     char nome2[50];
-    printf("Digite o nome da carta 2: ");
-    scanf("%S", nome2);
+    int populacao2, pontosTuristicos2;
+    float area2, pib2;
 
-    int populacaoCarta2;
-    printf("Digite a populacao da carta 2: ");
-    scanf("%d", &populacaoCarta2);
+    printf("\nDigite o estado da carta 2: ");
+    scanf("%s", estado2);
 
-    float tamanhoCarta2;
-    printf("Digite o tamanho da cidade 2: ");
-    scanf("%f", &tamanhoCarta2);
+    printf("Digite o codigo da carta 2: ");
+    scanf("%9s", codigo2);
 
-    float pibCarta2;
-    printf("Digite o PIB da cidade 2: ");
-    scanf("%f", &pibCarta2);
+    printf("Digite o nome da cidade da carta 2: ");
+    scanf("%s", nome2);
 
-    int pontosTuristicosCarta2;
-    printf("Digite a quantidade de pontos turisticos da carta 2: ");
-    scanf("%d", &pontosTuristicosCarta2);
+    printf("Digite a populacao: ");
+    scanf("%d", &populacao2);
 
-    float pibPerCaptaCarta1 = CalculatePIBPerCapta(pibCarta1, populacaoCarta1);
-    float pibPerCaptaCarta2 = CalculatePIBPerCapta(pibCarta2, populacaoCarta2);
-    float densityCarta1 = CalculatePopulationalDensity(populacaoCarta1, tamanhoCarta1);
-    float densityCarta2 = CalculatePopulationalDensity(populacaoCarta2, tamanhoCarta2);
+    printf("Digite a area: ");
+    scanf("%f", &area2);
 
-    //Display
-    printf("-- Carta 1:\n --");
-    printf("Estado: %c\n", estadoCarta1);
-    printf("Codigo: %d\n", codigoCarta1);
-    printf("Nome da Cidade: %s\n", nome1);
-    printf("Populacao: %d\n", populacaoCarta1);
-    printf("Area: %.2f km quadrados\n", tamanhoCarta1);
-    printf("PIB: %.2f bilhoes de reais \n", pibCarta1);
-    printf("Pontos Turisticos: %d\n", pontosTuristicosCarta1);
-    printf("Densidade populacional: %.3f hab/km quadrado \n", densityCarta1);
-    printf("PIB per capta: %.2f reais \n", pibPerCaptaCarta1);
+    printf("Digite o PIB: ");
+    scanf("%f", &pib2);
 
-    printf("-- Carta 2:\n -- ");
-    printf("Estado: %c\n", estadoCarta2);
-    printf("Codigo: %d\n", codigoCarta2);
-    printf("Nome da Cidade: %s\n", nome2);
-    printf("Populacao: %d\n", populacaoCarta2);
-    printf("Area: %.2f km quadrados\n", tamanhoCarta2);
-    printf("PIB: %.2f bilhoes de reais\n", pibCarta2);
-    printf("Pontos Turisticos: %d\n", pontosTuristicosCarta2);
-    printf("Densidade populacional: %.3f hab/km quadrado \n", densityCarta2);
-    printf("PIB per capta: %.2f reais \n", pibPerCaptaCarta2);
+    printf("Digite o numero de pontos turisticos: ");
+    scanf("%d", &pontosTuristicos2);
 
-    //jogo
-printf("-- Jogo --\n");
-    CompareValue(populacaoCarta1, populacaoCarta2, "Populacao");
-    CompareValue(codigoCarta1, codigoCarta2, "Codigo");
-    CompareValue(tamanhoCarta1, tamanhoCarta2, "Tamanho");
-    CompareValue(pibCarta1, pibCarta2, "PIB");
-    CompareValue(pontosTuristicosCarta1, pontosTuristicosCarta2, "Pontos Turisticos");
-    CompareValue(densityCarta2, densityCarta1, "Densidade");
-    CompareValue(pibPerCaptaCarta1, pibPerCaptaCarta2, "PIB per capta");
+    // Cálculos
+    float densidade1 = CalculatePopulationalDensity(populacao1, area1);
+    float densidade2 = CalculatePopulationalDensity(populacao2, area2);
+    float pibPerCapta1 = CalculatePIBPerCapta(pib1, populacao1);
+    float pibPerCapta2 = CalculatePIBPerCapta(pib2, populacao2);
+
+    // Exibição das cartas
+    printf("\n===== Carta 1 =====\n");
+    printf("Estado: %s\nCodigo: %s\n"
+           "Cidade: %s\n"
+           "Populacao: %d\n"
+           "Area: %.2f km quadrados\n"
+           "PIB: %.2f\n"
+           "Pontos Turisticos: %d\n"
+           "Densidade: %.2f hab/km quadrados\n"
+           "PIB per capita: %.2f\n",
+           estado1, codigo1, nome1, populacao1, area1, pib1, pontosTuristicos1, densidade1, pibPerCapta1);
+
+    printf("\n===== Carta 2 =====\n");
+    printf("Estado: %s\nCodigo: %s\n"
+           "Cidade: %s\nPopulacao: %d\n"
+           "Area: %.2f km quadrados\n"
+           "PIB: %.2f\n"
+           "Pontos Turisticos: %d\n"
+           "Densidade: %.2f hab/km quadrados\n"
+           "PIB per capita: %.2f\n",
+           estado2, codigo2, nome2, populacao2, area2, pib2, pontosTuristicos2, densidade2, pibPerCapta2);
+
+    // Comparação
+    printf("\n===== Comparacao =====\n");
+    CompareValue(pib1, pib2, "PIB", 0);
+    CompareValue(densidade1, densidade2, "Densidade Populacional", 1);
+    CompareValue(pibPerCapta1, pibPerCapta2, "PIB per Capita", 0);
+
+    return 0;
 }
