@@ -8,37 +8,25 @@ float CalculatePopulationalDensity(int population, float area) {
     return (float)population / area;
 }
 
-void CompareValue(float value1, float value2, char message[], int menorVence) {
+void CompareValue(float value1, float value2, char message[], int menorVence, char nome1[], char nome2[]) {
+    printf("\n--- Comparando atributo: %s ---\n", message);
+    printf("%s: %.2f\n", nome1, value1);
+    printf("%s: %.2f\n", nome2, value2);
+
     if (!menorVence) {
         if (value1 > value2)
-            printf("%s: Carta 1 venceu!\n", message);
+            printf("Resultado: Carta 1 (%s) venceu!\n", nome1);
         else if (value1 < value2)
-            printf("%s: Carta 2 venceu!\n", message);
+            printf("Resultado: Carta 2 (%s) venceu!\n", nome2);
         else
-            printf("%s: Empate!\n", message);
+            printf("Resultado: Empate!\n");
     } else {
         if (value1 < value2)
-            printf("%s: Carta 1 venceu!\n", message);
+            printf("Resultado: Carta 1 (%s) venceu!\n", nome1);
         else if (value1 > value2)
-            printf("%s: Carta 2 venceu!\n", message);
+            printf("Resultado: Carta 2 (%s) venceu!\n", nome2);
         else
-            printf("%s: Empate!\n", message);
-    }
-}
-
-void CompareFloatValue(float value1, float value2, char message[])
-{
-    if (value1 > value2)
-    {
-        printf("%s: Carta 1 venceu\n", message);
-    }
-    else if (value1 < value2)
-    {
-        printf("%s: Carta 2 venceu\n", message);
-    }
-    else
-    {
-        printf("%s: Empate\n", message);
+            printf("Resultado: Empate!\n");
     }
 }
 
@@ -129,11 +117,42 @@ int main()
            "PIB per capita: %.2f\n",
            estado2, codigo2, nome2, populacao2, area2, pib2, pontosTuristicos2, densidade2, pibPerCapta2);
 
-    // Comparação
-    printf("\n===== Comparacao =====\n");
-    CompareValue(pib1, pib2, "PIB", 0);
-    CompareValue(densidade1, densidade2, "Densidade Populacional", 1);
-    CompareValue(pibPerCapta1, pibPerCapta2, "PIB per Capita", 0);
+    int opcao;
+
+    do {
+        printf("\n===== MENU DE COMPARACAO =====\n");
+        printf("1 - Populacao\n");
+        printf("2 - Area\n");
+        printf("3 - PIB\n");
+        printf("4 - Numero de pontos turisticos\n");
+        printf("5 - Densidade demografica\n");
+        printf("0 - Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                CompareValue(populacao1, populacao2, "Populacao", 0, nome1, nome2);
+                break;
+            case 2:
+                CompareValue(area1, area2, "Area", 0, nome1, nome2);
+                break;
+            case 3:
+                CompareValue(pib1, pib2, "PIB", 0, nome1, nome2);
+                break;
+            case 4:
+                CompareValue(pontosTuristicos1, pontosTuristicos2, "Pontos Turisticos", 0, nome1, nome2);
+                break;
+            case 5:
+                CompareValue(densidade1, densidade2, "Densidade Demografica", 1, nome1, nome2);
+                break;
+            case 0:
+                printf("Encerrando o programa...\n");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+        }
+    } while (opcao != 0);
 
     return 0;
 }
